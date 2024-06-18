@@ -146,11 +146,28 @@
     <script>
         // Exemplo de dados climáticos simulados
         const dadosClima = [
-            { id: 1, dataHora: "2024-06-12 00:00:00", precipitacao: 3.7, nivelAgua: 3.3, vento: 28.9, pressao: 1017.0, umidade: 85.6, temperatura: 20.4, perigo: "Chuva Média" },
-            { id: 2, dataHora: "2024-06-12 01:00:00", precipitacao: 7.9, nivelAgua: 4.7, vento: 39.1, pressao: 1016.8, umidade: 61.1, temperatura: 34.3, perigo: "Perigo de Enchente" },
-            { id: 3, dataHora: "2024-06-12 02:00:00", precipitacao: 9.5, nivelAgua: 4.1, vento: 29.3, pressao: 985.5, umidade: 74.4, temperatura: 33.6, perigo: "Grande Perigo de Enchente" },
-            // ... continue com os outros dados
-        ];
+           { id: 1, dataHora: "2023-06-12 00:00:00", precipitacao: 3.7, nivelAgua: 3.3, vento: 28.9, pressao: 1017.0, umidade: 85.6, temperatura: 20.4, perigo: "Chuva Média" },
+    { id: 2, dataHora: "2022-06-12 01:00:00", precipitacao: 7.9, nivelAgua: 4.7, vento: 39.1, pressao: 1016.8, umidade: 61.1, temperatura: 34.3, perigo: "Perigo de Enchente" },
+    { id: 3, dataHora: "2024-05-12 02:00:00", precipitacao: 9.5, nivelAgua: 4.1, vento: 29.3, pressao: 985.5, umidade: 74.4, temperatura: 33.6, perigo: "Grande Perigo de Enchente" },
+    { id: 4, dataHora: "2024-04-12 03:00:00", precipitacao: 9.4, nivelAgua: 2.8, vento: 12.3, pressao: 1000.9, umidade: 84.5, temperatura: 26.2, perigo: "Perigo Potencial de Enchente" },
+    { id: 5, dataHora: "2024-07-12 04:00:00", precipitacao: 0.2, nivelAgua: 1.6, vento: 53.8, pressao: 1009.6, umidade: 85.1, temperatura: 21.0, perigo: "Chuva Fraca" },
+    { id: 6, dataHora: "2024-06-10 05:00:00", precipitacao: 6.3, nivelAgua: 4.8, vento: 14.2, pressao: 1008.1, umidade: 88.5, temperatura: 27.9, perigo: "Chuva Média" },
+    { id: 7, dataHora: "2024-06-11 06:00:00", precipitacao: 11.6, nivelAgua: 1.9, vento: 19.8, pressao: 1012.7, umidade: 95.8, temperatura: 21.4, perigo: "Chuva Forte" },
+    { id: 8, dataHora: "2024-06-15 07:00:00", precipitacao: 2.2, nivelAgua: 3.1, vento: 58.1, pressao: 988.2, umidade: 63.8, temperatura: 24.8, perigo: "Chuva Fraca" },
+    { id: 9, dataHora: "2024-05-15 08:00:00", precipitacao: 15.6, nivelAgua: 1.4, vento: 15.3, pressao: 991.9, umidade: 79.1, temperatura: 28.5, perigo: "Chuva Forte" },
+    { id: 10, dataHora: "2024-03-16 09:00:00", precipitacao: 19.9, nivelAgua: 4.4, vento: 54.1, pressao: 1009.2, umidade: 66.6, temperatura: 19.1, perigo: "Grande Perigo de Enchente" },
+    { id: 11, dataHora: "2023-06-10 10:00:00", precipitacao: 16.6, nivelAgua: 1.0, vento: 21.5, pressao: 1009.6, umidade: 95.4, temperatura: 18.8, perigo: "Chuva Forte" },
+    { id: 12, dataHora: "2024-06-12 11:00:00", precipitacao: 11.9, nivelAgua: 2.9, vento: 28.3, pressao: 1016.7, umidade: 98.6, temperatura: 25.7, perigo: "Perigo Potencial de Enchente" },
+    { id: 13, dataHora: "2024-06-05 12:00:00", precipitacao: 6.7, nivelAgua: 2.6, vento: 39.9, pressao: 983.4, umidade: 60.2, temperatura: 34.7, perigo: "Chuva Média" },
+    { id: 14, dataHora: "2024-06-18 13:00:00", precipitacao: 14.7, nivelAgua: 2.6, vento: 23.5, pressao: 981.9, umidade: 78.1, temperatura: 25.8, perigo: "Perigo Potencial de Enchente" },
+    { id: 15, dataHora: "2024-06-19 14:00:00", precipitacao: 11.0, nivelAgua: 1.1, vento: 28.5, pressao: 998.6, umidade: 79.4, temperatura: 20.5, perigo: "Chuva Forte" },
+    { id: 16, dataHora: "2024-06-03 15:00:00", precipitacao: 1.1, nivelAgua: 1.6, vento: 9.4, pressao: 995.8, umidade: 76.7, temperatura: 18.0, perigo: "Chuva Fraca" },
+    { id: 17, dataHora: "2024-05-03 16:00:00", precipitacao: 8.8, nivelAgua: 3.2, vento: 16.0, pressao: 1007.0, umidade: 70.9, temperatura: 29.6, perigo: "Perigo de Enchente" },
+    { id: 18, dataHora: "2024-06-08 17:00:00", precipitacao: 4.9, nivelAgua: 3.6, vento: 37.1, pressao: 989.2, umidade: 71.1, temperatura: 20.0, perigo: "Chuva Média" },
+    { id: 19, dataHora: "2024-05-04 18:00:00", precipitacao: 12.4, nivelAgua: 2.4, vento: 41.8, pressao: 993.2, umidade: 65.0, temperatura: 24.9, perigo: "Perigo de Enchente" },
+    { id: 20, dataHora: "2024-05-09 19:00:00", precipitacao: 0.2, nivelAgua: 4.3, vento: 15.2, pressao: 1015.1, umidade: 63.9, temperatura: 21.6, perigo: "Chuva Fraca" },
+    // Continue com os dados restantes...
+];
 
         function aplicarFiltro() {
             const dataInicio = document.getElementById('dataInicio').value;
