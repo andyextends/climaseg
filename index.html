@@ -111,6 +111,16 @@
                 <button class="btn btn-secondary" onclick="verHistoricoClima()">Histórico de Clima</button>
                 <button class="btn btn-danger" onclick="verPossibilidadesEnchentes()">Possibilidades de Enchentes</button>
             </div>
+            <div class="form-row">
+                <div class="col-md-10 mb-3">
+                    <label for="dataFutura">Previsão para Data Futura</label>
+                    <input type="date" class="form-control" id="dataFutura">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary btn-block" onclick="preverClimaFuturo()">Prever Clima</button>
+                </div>
+            </div>
             <div id="resultado" class="mt-4"></div>
         </section>
         
@@ -123,7 +133,7 @@
                     <input type="text" class="form-control" id="nome" placeholder="Seu nome">
                 </div>
                 <div class="form-group">
-                    <label for="e-mail">Email</label>
+                    <label for="e-mail">E-mail</label>
                     <input type="e-mail" class="form-control" id="e-mail" placeholder="Seu e-mail">
                 </div>
                 <div class="form-group">
@@ -215,7 +225,7 @@
     { id: 69, dataHora: "2024-01-04 16:00:00", precipitacao: 19.6, nivelAgua: 4.1, vento: 29.4, pressao: 1000.3, umidade: 70.0, temperatura: 33.8, perigo: "Grande Perigo de Enchente" },
     { id: 70, dataHora: "2024-01-04 17:00:00", precipitacao: 15.1, nivelAgua: 3.5, vento: 22.6, pressao: 1011.7, umidade: 74.3, temperatura: 18.0, perigo: "Chuva Forte" }       
         ];
-
+        
         // Função para filtrar dados climáticos com base nas datas
         function aplicarFiltro() {
             const dataInicio = document.getElementById("dataInicio").value;
@@ -296,6 +306,59 @@
         function verPossibilidadesEnchentes() {
             const dadosEnchentes = dadosClima.filter(dado => dado.perigo.includes("Enchente"));
             exibirResultados(dadosEnchentes);
+        }
+
+        // Função para prever clima futuro
+        function preverClimaFuturo() {
+            const dataFutura = document.getElementById("dataFutura").value;
+
+            if (!dataFutura) {
+                alert("Por favor, selecione uma data futura.");
+                return;
+            }
+
+            // Simulação simples: usar dados históricos para prever o clima futuro
+            const previsao = dadosClima[Math.floor(Math.random() * dadosClima.length)];
+
+            const resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = "<h4>Previsão do Clima para " + new Date(dataFutura).toLocaleDateString() + ":</h4>";
+
+            const tabela = document.createElement("table");
+            tabela.classList.add("table", "table-striped");
+
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th>ID</th>
+                    <th>Data/Hora</th>
+                    <th>Precipitação (mm)</th>
+                    <th>Nível da Água (m)</th>
+                    <th>Vento (km/h)</th>
+                    <th>Pressão (hPa)</th>
+                    <th>Umidade (%)</th>
+                    <th>Temperatura (°C)</th>
+                    <th>Perigo</th>
+                </tr>
+            `;
+            tabela.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${previsao.id}</td>
+                <td>${dataFutura}</td>
+                <td>${previsao.precipitacao}</td>
+                <td>${previsao.nivelAgua}</td>
+                <td>${previsao.vento}</td>
+                <td>${previsao.pressao}</td>
+                <td>${previsao.umidade}</td>
+                <td>${previsao.temperatura}</td>
+                <td>${previsao.perigo}</td>
+            `;
+            tbody.appendChild(tr);
+            tabela.appendChild(tbody);
+
+            resultadoDiv.appendChild(tabela);
         }
     </script>
 </body>
