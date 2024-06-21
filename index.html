@@ -63,88 +63,237 @@
                         <p class="card-text">Plataforma de serviços em nuvem da Microsoft.</p>
                     </div>
                 </div>
-                <div class
-<div class="card">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Python</h5>
-                        <p class="card-text">Linguagem de programação versátil e poderosa, utilizada para processamento de dados e modelagem climática.</p>
+                        <h5 class="card-title">Machine Learning</h5>
+                        <p class="card-text">Tecnologia para criação de modelos preditivos.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Machine Learning</h5>
-                        <p class="card-text">Técnicas avançadas de aprendizado de máquina para previsão e análise de dados climáticos.</p>
+                        <h5 class="card-title">Banco de Dados na Nuvem</h5>
+                        <p class="card-text">Armazenamento seguro e escalável de dados.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Azure IoT Hub</h5>
+                        <p class="card-text">Conexão e monitoramento de dispositivos IoT.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Azure Functions</h5>
+                        <p class="card-text">Execução de código sob demanda na nuvem.</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="clima">
-            <h2 class="my-4">Clima</h2>
-            <form id="climaForm">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="dataInicial">Data Inicial</label>
-                        <input type="date" class="form-control" id="dataInicial" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="dataFinal">Data Final</label>
-                        <input type="date" class="form-control" id="dataFinal" required>
-                    </div>
+        <section id="clima" class="my-4">
+            <h2>Panorama do Clima</h2>
+            <p>Veja o clima do dia, histórico de clima dos últimos dias e anos, e possibilidades de enchentes.</p>
+            <div class="form-row">
+                <div class="col-md-5 mb-3">
+                    <label for="dataInicio">Data Inicial</label>
+                    <input type="date" class="form-control" id="dataInicio">
                 </div>
-                <button type="submit" class="btn btn-primary">Consultar Clima</button>
-            </form>
-            
-            <div class="mt-4">
-                <button class="btn btn-success" onclick="preverClimaFuturo(7)">Previsão para 7 dias</button>
-                <button class="btn btn-warning" onclick="preverClimaFuturo(30)">Previsão para 30 dias</button>
-                <button class="btn btn-danger" onclick="preverClimaFuturo(365)">Previsão para 1 ano</button>
+                <div class="col-md-5 mb-3">
+                    <label for="dataFim">Data Final</label>
+                    <input type="date" class="form-control" id="dataFim">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary btn-block" onclick="aplicarFiltro()">Aplicar Filtro</button>
+                </div>
             </div>
-            
-            <div id="resultadosClima" class="mt-4">
-                <!-- Resultados da previsão climática serão exibidos aqui -->
+            <div class="btn-group mb-4" role="group">
+                <button class="btn btn-secondary" onclick="verHistoricoClima()">Histórico de Clima</button>
+                <button class="btn btn-danger" onclick="verPossibilidadesEnchentes()">Possibilidades de Enchentes</button>
             </div>
+            <div class="form-row">
+                <div class="col-md-10 mb-3">
+                    <label for="dataFutura">Previsão para Data Futura</label>
+                    <input type="date" class="form-control" id="dataFutura">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary btn-block" onclick="preverClimaFuturo()">Prever Clima</button>
+                </div>
+            </div>
+            <div id="resultado" class="mt-4"></div>
         </section>
         
         <section id="contato" class="my-4">
             <h2>Contato</h2>
-            <p>Para mais informações, entre em contato conosco:</p>
-            <ul>
-                <li>Email: contato@panoramaclima.com</li>
-                <li>Telefone: (11) 1234-5678</li>
-                <li>Endereço: Rua Microsoft, 123, São Paulo, SP</li>
-            </ul>
+            <p>Para mais informações sobre o Panorama do Clima, entre em contato conosco.</p>
+            <form>
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="e-mail">Email</label>
+                    <input type="e-mail" class="form-control" id="e-mail" placeholder="Seu e-mail">
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea class="form-control" id="mensagem" rows="3" placeholder="Sua mensagem"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
         </section>
     </div>
     
-    <!-- Bootstrap JS, jQuery, and Popper.js -->
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
+    <!-- JavaScript para funcionalidades de clima -->
     <script>
-        document.getElementById('climaForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const dataInicial = document.getElementById('dataInicial').value;
-            const dataFinal = document.getElementById('dataFinal').value;
-            consultarClima(dataInicial, dataFinal);
-        });
+        // Exemplo de dados climáticos simulados
+        const dadosClima = [
+            { id: 1, dataHora: "2023-06-12 00:00:00", precipitacao: 3.7, nivelAgua: 3.3, vento: 28.9, pressao: 1017.0, umidade: 85.6, temperatura: 20.4, perigo: "Chuva Média" },
+            { id: 2, dataHora: "2022-06-12 01:00:00", precipitacao: 7.9, nivelAgua: 4.7, vento: 39.1, pressao: 1016.8, umidade: 61.1, temperatura: 34.3, perigo: "Perigo de Enchente" },
+            { id: 3, dataHora: "2022-07-11 08:00:00", precipitacao: 10.3, nivelAgua: 5.6, vento: 35.0, pressao: 1015.9, umidade: 72.0, temperatura: 33.0, perigo: "Perigo de Enchente" },
+            { id: 4, dataHora: "2022-07-20 09:00:00", precipitacao: 5.2, nivelAgua: 3.1, vento: 15.3, pressao: 1016.0, umidade: 55.2, temperatura: 27.0, perigo: "Chuva Moderada" },
+            { id: 5, dataHora: "2022-08-01 10:00:00", precipitacao: 4.0, nivelAgua: 2.8, vento: 25.3, pressao: 1012.0, umidade: 73.5, temperatura: 25.0, perigo: "Nenhum" }
+        ];
 
-        function consultarClima(dataInicial, dataFinal) {
-            // Função para consultar clima no intervalo fornecido
-            // Implementar a lógica para consultar clima com dados históricos entre as datas
-            document.getElementById('resultadosClima').innerHTML = `Consultando clima de ${dataInicial} a ${dataFinal}...`;
+        // Função para filtrar dados climáticos com base nas datas
+        function aplicarFiltro() {
+            const dataInicio = document.getElementById("dataInicio").value;
+            const dataFim = document.getElementById("dataFim").value;
+
+            if (!dataInicio || !dataFim) {
+                alert("Por favor, selecione as datas de início e fim.");
+                return;
+            }
+
+            const dataInicioObj = new Date(dataInicio);
+            const dataFimObj = new Date(dataFim);
+
+            const dadosFiltrados = dadosClima.filter(dado => {
+                const dataDado = new Date(dado.dataHora);
+                return dataDado >= dataInicioObj && dataDado <= dataFimObj;
+            });
+
+            exibirResultados(dadosFiltrados);
         }
 
-        function preverClimaFuturo(intervaloDias) {
-            const hoje = new Date();
-            const dataFutura = new Date();
-            dataFutura.setDate(hoje.getDate() + intervaloDias);
-            const dataFuturaFormatada = dataFutura.toISOString().split('T')[0];
+        // Função para exibir resultados na página
+        function exibirResultados(dados) {
+            const resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = "";
 
-            // Implementar lógica para prever clima futuro usando dados históricos
-            // Exemplo simplificado para fins ilustrativos
-            document.getElementById('resultadosClima').innerHTML = `Previsão do clima para os próximos ${intervaloDias} dias (${dataFuturaFormatada}):<br>Temperatura média: 25°C<br>Chuva: 10%<br>Umidade: 60%`;
+            if (dados.length === 0) {
+                resultadoDiv.innerHTML = "<p>Nenhum dado encontrado para o período selecionado.</p>";
+                return;
+            }
+
+            const tabela = document.createElement("table");
+            tabela.classList.add("table", "table-striped");
+
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th>ID</th>
+                    <th>Data/Hora</th>
+                    <th>Precipitação (mm)</th>
+                    <th>Nível da Água (m)</th>
+                    <th>Vento (km/h)</th>
+                    <th>Pressão (hPa)</th>
+                    <th>Umidade (%)</th>
+                    <th>Temperatura (°C)</th>
+                    <th>Perigo</th>
+                </tr>
+            `;
+            tabela.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            dados.forEach(dado => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${dado.id}</td>
+                    <td>${dado.dataHora}</td>
+                    <td>${dado.precipitacao}</td>
+                    <td>${dado.nivelAgua}</td>
+                    <td>${dado.vento}</td>
+                    <td>${dado.pressao}</td>
+                    <td>${dado.umidade}</td>
+                    <td>${dado.temperatura}</td>
+                    <td>${dado.perigo}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            tabela.appendChild(tbody);
+
+            resultadoDiv.appendChild(tabela);
+        }
+
+        // Função para ver histórico de clima
+        function verHistoricoClima() {
+            exibirResultados(dadosClima);
+        }
+
+        // Função para ver possibilidades de enchentes
+        function verPossibilidadesEnchentes() {
+            const dadosEnchentes = dadosClima.filter(dado => dado.perigo.includes("Enchente"));
+            exibirResultados(dadosEnchentes);
+        }
+
+        // Função para prever clima futuro
+        function preverClimaFuturo() {
+            const dataFutura = document.getElementById("dataFutura").value;
+
+            if (!dataFutura) {
+                alert("Por favor, selecione uma data futura.");
+                return;
+            }
+
+            // Simulação simples: usar dados históricos para prever o clima futuro
+            const previsao = dadosClima[Math.floor(Math.random() * dadosClima.length)];
+
+            const resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = "<h4>Previsão do Clima para " + new Date(dataFutura).toLocaleDateString() + ":</h4>";
+
+            const tabela = document.createElement("table");
+            tabela.classList.add("table", "table-striped");
+
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th>ID</th>
+                    <th>Data/Hora</th>
+                    <th>Precipitação (mm)</th>
+                    <th>Nível da Água (m)</th>
+                    <th>Vento (km/h)</th>
+                    <th>Pressão (hPa)</th>
+                    <th>Umidade (%)</th>
+                    <th>Temperatura (°C)</th>
+                    <th>Perigo</th>
+                </tr>
+            `;
+            tabela.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${previsao.id}</td>
+                <td>${dataFutura}</td>
+                <td>${previsao.precipitacao}</td>
+                <td>${previsao.nivelAgua}</td>
+                <td>${previsao.vento}</td>
+                <td>${previsao.pressao}</td>
+                <td>${previsao.umidade}</td>
+                <td>${previsao.temperatura}</td>
+                <td>${previsao.perigo}</td>
+            `;
+            tbody.appendChild(tr);
+            tabela.appendChild(tbody);
+
+            resultadoDiv.appendChild(tabela);
         }
     </script>
 </body>
