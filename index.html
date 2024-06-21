@@ -63,239 +63,88 @@
                         <p class="card-text">Plataforma de serviços em nuvem da Microsoft.</p>
                     </div>
                 </div>
+                <div class
+<div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Python</h5>
+                        <p class="card-text">Linguagem de programação versátil e poderosa, utilizada para processamento de dados e modelagem climática.</p>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Machine Learning</h5>
-                        <p class="card-text">Tecnologia para criação de modelos preditivos.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Banco de Dados na Nuvem</h5>
-                        <p class="card-text">Armazenamento seguro e escalável de dados.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Azure IoT Hub</h5>
-                        <p class="card-text">Conexão e monitoramento de dispositivos IoT.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Azure Functions</h5>
-                        <p class="card-text">Execução de código sob demanda na nuvem.</p>
+                        <p class="card-text">Técnicas avançadas de aprendizado de máquina para previsão e análise de dados climáticos.</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="clima" class="my-4">
-            <h2>Panorama do Clima</h2>
-            <p>Veja o clima do dia, histórico de clima dos últimos dias e anos, e possibilidades de enchentes.</p>
-            <div class="form-row">
-                <div class="col-md-5 mb-3">
-                    <label for="dataInicio">Data Inicial</label>
-                    <input type="date" class="form-control" id="dataInicio">
+        <section id="clima">
+            <h2 class="my-4">Clima</h2>
+            <form id="climaForm">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="dataInicial">Data Inicial</label>
+                        <input type="date" class="form-control" id="dataInicial" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="dataFinal">Data Final</label>
+                        <input type="date" class="form-control" id="dataFinal" required>
+                    </div>
                 </div>
-                <div class="col-md-5 mb-3">
-                    <label for="dataFim">Data Final</label>
-                    <input type="date" class="form-control" id="dataFim">
-                </div>
-                <div class="col-md-2 mb-3">
-                    <label>&nbsp;</label>
-                    <button class="btn btn-primary btn-block" onclick="aplicarFiltro()">Aplicar Filtro</button>
-                </div>
+                <button type="submit" class="btn btn-primary">Consultar Clima</button>
+            </form>
+            
+            <div class="mt-4">
+                <button class="btn btn-success" onclick="preverClimaFuturo(7)">Previsão para 7 dias</button>
+                <button class="btn btn-warning" onclick="preverClimaFuturo(30)">Previsão para 30 dias</button>
+                <button class="btn btn-danger" onclick="preverClimaFuturo(365)">Previsão para 1 ano</button>
             </div>
-            <div class="btn-group mb-4" role="group">
-                <button class="btn btn-secondary" onclick="verHistoricoClima()">Histórico de Clima</button>
-                <button class="btn btn-danger" onclick="verPossibilidadesEnchentes()">Possibilidades de Enchentes</button>
+            
+            <div id="resultadosClima" class="mt-4">
+                <!-- Resultados da previsão climática serão exibidos aqui -->
             </div>
-            <div id="resultado" class="mt-4"></div>
         </section>
         
         <section id="contato" class="my-4">
             <h2>Contato</h2>
-            <p>Para mais informações sobre o Panorama do Clima, entre em contato conosco.</p>
-            <form>
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Seu nome">
-                </div>
-                <div class="form-group">
-                    <label for="e-mail">Email</label>
-                    <input type="e-mail" class="form-control" id="e-mail" placeholder="Seu e-mail">
-                </div>
-                <div class="form-group">
-                    <label for="mensagem">Mensagem</label>
-                    <textarea class="form-control" id="mensagem" rows="3" placeholder="Sua mensagem"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
+            <p>Para mais informações, entre em contato conosco:</p>
+            <ul>
+                <li>Email: contato@panoramaclima.com</li>
+                <li>Telefone: (11) 1234-5678</li>
+                <li>Endereço: Rua Microsoft, 123, São Paulo, SP</li>
+            </ul>
         </section>
     </div>
     
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS, jQuery, and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-     <!-- JavaScript para funcionalidades de clima -->
     <script>
-        // Exemplo de dados climáticos simulados
-        const dadosClima = [
-    { id: 1, dataHora: "2022-06-12 00:00:00", precipitacao: 3.7, nivelAgua: 3.3, vento: 28.9, pressao: 1017.0, umidade: 85.6, temperatura: 20.4, perigo: "Chuva Média" },
-    { id: 2, dataHora: "2022-06-12 01:00:00", precipitacao: 7.9, nivelAgua: 4.7, vento: 39.1, pressao: 1016.8, umidade: 61.1, temperatura: 34.3, perigo: "Perigo de Enchente" },
-    { id: 3, dataHora: "2022-05-12 02:00:00", precipitacao: 9.5, nivelAgua: 4.1, vento: 29.3, pressao: 985.5, umidade: 74.4, temperatura: 33.6, perigo: "Grande Perigo de Enchente" },
-    { id: 4, dataHora: "2022-04-12 03:00:00", precipitacao: 9.4, nivelAgua: 2.8, vento: 12.3, pressao: 1000.9, umidade: 84.5, temperatura: 26.2, perigo: "Perigo Potencial de Enchente" },
-    { id: 5, dataHora: "2022-07-12 04:00:00", precipitacao: 0.2, nivelAgua: 1.6, vento: 25.3, pressao: 1012.0, umidade: 73.5, temperatura: 25.0, perigo: "Nenhum" },
-    { id: 6, dataHora: "2022-06-10 05:00:00", precipitacao: 6.3, nivelAgua: 4.8, vento: 14.2, pressao: 1008.1, umidade: 88.5, temperatura: 27.9, perigo: "Chuva Média" },
-    { id: 7, dataHora: "2023-06-11 06:00:00", precipitacao: 11.6, nivelAgua: 1.9, vento: 19.8, pressao: 1012.7, umidade: 95.8, temperatura: 21.4, perigo: "Chuva Forte" },
-    { id: 8, dataHora: "2023-06-15 07:00:00", precipitacao: 2.2, nivelAgua: 3.1, vento: 58.1, pressao: 988.2, umidade: 63.8, temperatura: 24.8, perigo: "Chuva Fraca" },
-    { id: 9, dataHora: "2023-05-15 08:00:00", precipitacao: 15.6, nivelAgua: 1.4, vento: 15.3, pressao: 991.9, umidade: 79.1, temperatura: 28.5, perigo: "Chuva Forte" },
-    { id: 10, dataHora: "2023-03-16 09:00:00", precipitacao: 19.9, nivelAgua: 4.4, vento: 54.1, pressao: 1009.2, umidade: 66.6, temperatura: 19.1, perigo: "Grande Perigo de Enchente" },
-    { id: 11, dataHora: "2023-06-10 10:00:00", precipitacao: 16.6, nivelAgua: 1.0, vento: 21.5, pressao: 1009.6, umidade: 95.4, temperatura: 18.8, perigo: "Chuva Forte" },
-    { id: 12, dataHora: "2023-06-12 11:00:00", precipitacao: 11.9, nivelAgua: 2.9, vento: 28.3, pressao: 1016.7, umidade: 98.6, temperatura: 25.7, perigo: "Perigo Potencial de Enchente" },
-    { id: 13, dataHora: "2023-06-05 12:00:00", precipitacao: 6.7, nivelAgua: 2.6, vento: 39.9, pressao: 983.4, umidade: 60.2, temperatura: 34.7, perigo: "Chuva Média" },
-    { id: 14, dataHora: "2023-06-18 13:00:00", precipitacao: 14.7, nivelAgua: 2.6, vento: 23.5, pressao: 981.9, umidade: 78.1, temperatura: 25.8, perigo: "Perigo Potencial de Enchente" },
-    { id: 15, dataHora: "2023-06-19 14:00:00", precipitacao: 11.0, nivelAgua: 1.1, vento: 28.5, pressao: 998.6, umidade: 79.4, temperatura: 20.5, perigo: "Chuva Forte" },
-    { id: 16, dataHora: "2023-06-03 15:00:00", precipitacao: 1.1, nivelAgua: 1.6, vento: 9.4, pressao: 995.8, umidade: 76.7, temperatura: 18.0, perigo: "Chuva Fraca" },
-    { id: 17, dataHora: "2023-05-03 16:00:00", precipitacao: 8.8, nivelAgua: 3.2, vento: 16.0, pressao: 1007.0, umidade: 70.9, temperatura: 29.6, perigo: "Perigo de Enchente" },
-    { id: 18, dataHora: "2023-06-08 17:00:00", precipitacao: 4.9, nivelAgua: 3.6, vento: 37.1, pressao: 989.2, umidade: 71.1, temperatura: 20.0, perigo: "Chuva Média" },
-    { id: 19, dataHora: "2023-05-04 18:00:00", precipitacao: 12.4, nivelAgua: 2.4, vento: 41.8, pressao: 993.2, umidade: 65.0, temperatura: 24.9, perigo: "Perigo de Enchente" },
-    { id: 20, dataHora: "2023-05-09 19:00:00", precipitacao: 0.2, nivelAgua: 4.3, vento: 15.2, pressao: 1015.1, umidade: 63.9, temperatura: 21.6, perigo: "Chuva Fraca" },
-    { id: 21, dataHora: "2023-06-14 20:00:00", precipitacao: 10.3, nivelAgua: 3.5, vento: 21.1, pressao: 1013.2, umidade: 83.2, temperatura: 29.3, perigo: "Perigo de Enchente" },
-    { id: 22, dataHora: "2023-06-20 21:00:00", precipitacao: 6.2, nivelAgua: 2.7, vento: 14.3, pressao: 1004.8, umidade: 81.4, temperatura: 27.6, perigo: "Chuva Média" },
-    { id: 23, dataHora: "2023-06-25 22:00:00", precipitacao: 1.4, nivelAgua: 4.2, vento: 10.8, pressao: 1002.3, umidade: 74.5, temperatura: 23.0, perigo: "Chuva Fraca" },
-    { id: 24, dataHora: "2023-06-13 23:00:00", precipitacao: 9.0, nivelAgua: 2.0, vento: 33.5, pressao: 996.7, umidade: 88.9, temperatura: 22.3, perigo: "Perigo Potencial de Enchente" },
-    { id: 25, dataHora: "2023-05-13 00:00:00", precipitacao: 8.3, nivelAgua: 2.5, vento: 19.2, pressao: 1008.5, umidade: 79.8, temperatura: 21.9, perigo: "Perigo de Enchente" },
-    { id: 26, dataHora: "2023-06-24 01:00:00", precipitacao: 2.7, nivelAgua: 3.7, vento: 22.4, pressao: 990.8, umidade: 72.3, temperatura: 26.4, perigo: "Chuva Fraca" },
-    { id: 27, dataHora: "2023-06-17 02:00:00", precipitacao: 5.1, nivelAgua: 4.6, vento: 28.9, pressao: 1011.6, umidade: 76.9, temperatura: 25.0, perigo: "Chuva Média" },
-    { id: 28, dataHora: "2023-06-16 03:00:00", precipitacao: 4.4, nivelAgua: 3.0, vento: 26.7, pressao: 1017.9, umidade: 84.7, temperatura: 24.5, perigo: "Chuva Média" },
-    { id: 29, dataHora: "2023-05-16 04:00:00", precipitacao: 11.8, nivelAgua: 2.3, vento: 30.2, pressao: 1013.5, umidade: 78.4, temperatura: 27.8, perigo: "Chuva Forte" },
-    { id: 30, dataHora: "2023-05-17 05:00:00", precipitacao: 13.4, nivelAgua: 1.5, vento: 23.8, pressao: 1009.1, umidade: 80.6, temperatura: 28.2, perigo: "Grande Perigo de Enchente" },
-    { id: 31, dataHora: "2023-05-18 06:00:00", precipitacao: 2.9, nivelAgua: 2.7, vento: 17.5, pressao: 1005.4, umidade: 73.2, temperatura: 22.5, perigo: "Chuva Fraca" },
-    { id: 32, dataHora: "2023-05-19 07:00:00", precipitacao: 10.6, nivelAgua: 3.8, vento: 32.9, pressao: 1006.7, umidade: 89.0, temperatura: 25.6, perigo: "Chuva Forte" },
-    { id: 33, dataHora: "2023-05-20 08:00:00", precipitacao: 3.4, nivelAgua: 2.9, vento: 24.1, pressao: 1010.3, umidade: 75.6, temperatura: 23.4, perigo: "Chuva Média" },
-    { id: 34, dataHora: "2023-05-21 09:00:00", precipitacao: 6.5, nivelAgua: 4.0, vento: 35.6, pressao: 1014.2, umidade: 82.1, temperatura: 26.1, perigo: "Chuva Média" },
-    { id: 35, dataHora: "2023-05-22 10:00:00", precipitacao: 12.1, nivelAgua: 1.2, vento: 21.9, pressao: 1016.4, umidade: 84.3, temperatura: 27.1, perigo: "Perigo Potencial de Enchente" },
-    { id: 36, dataHora: "2024-05-23 11:00:00", precipitacao: 7.3, nivelAgua: 3.3, vento: 29.1, pressao: 1018.0, umidade: 81.6, temperatura: 25.9, perigo: "Chuva Média" },
-    { id: 37, dataHora: "2024-05-24 12:00:00", precipitacao: 5.6, nivelAgua: 2.1, vento: 18.7, pressao: 1012.1, umidade: 79.7, temperatura: 24.7, perigo: "Chuva Média" },
-    { id: 38, dataHora: "2024-05-25 13:00:00", precipitacao: 3.9, nivelAgua: 3.9, vento: 15.0, pressao: 1007.2, umidade: 77.2, temperatura: 22.8, perigo: "Chuva Fraca" },
-    { id: 39, dataHora: "2024-05-26 14:00:00", precipitacao: 1.8, nivelAgua: 2.2, vento: 12.7, pressao: 1003.5, umidade: 74.9, temperatura: 23.5, perigo: "Chuva Fraca" },
-    { id: 40, dataHora: "2024-05-27 15:00:00", precipitacao: 8.1, nivelAgua: 4.5, vento: 24.9, pressao: 1011.8, umidade: 83.5, temperatura: 26.7, perigo: "Perigo de Enchente" },
-    { id: 41, dataHora: "2024-05-28 16:00:00", precipitacao: 6.0, nivelAgua: 3.1, vento: 28.1, pressao: 1015.5, umidade: 82.8, temperatura: 24.9, perigo: "Chuva Média" },
-    { id: 42, dataHora: "2024-05-29 17:00:00", precipitacao: 4.3, nivelAgua: 3.4, vento: 16.9, pressao: 1019.7, umidade: 78.5, temperatura: 23.3, perigo: "Chuva Média" },
-    { id: 43, dataHora: "2024-05-30 18:00:00", precipitacao: 9.8, nivelAgua: 2.5, vento: 23.3, pressao: 1020.8, umidade: 87.4, temperatura: 25.2, perigo: "Chuva Forte" },
-    { id: 44, dataHora: "2024-05-31 19:00:00", precipitacao: 14.1, nivelAgua: 4.1, vento: 26.8, pressao: 1009.5, umidade: 85.8, temperatura: 24.4, perigo: "Grande Perigo de Enchente" },
-    { id: 45, dataHora: "2024-06-01 20:00:00", precipitacao: 1.6, nivelAgua: 3.8, vento: 14.1, pressao: 1016.6, umidade: 73.6, temperatura: 22.1, perigo: "Chuva Fraca" },
-    { id: 46, dataHora: "2024-06-02 21:00:00", precipitacao: 5.4, nivelAgua: 2.2, vento: 11.9, pressao: 1013.8, umidade: 80.3, temperatura: 24.2, perigo: "Chuva Média" },
-    { id: 47, dataHora: "2024-06-03 22:00:00", precipitacao: 7.8, nivelAgua: 4.4, vento: 20.3, pressao: 1005.1, umidade: 83.7, temperatura: 27.5, perigo: "Chuva Média" },
-    { id: 48, dataHora: "2024-06-04 23:00:00", precipitacao: 9.9, nivelAgua: 3.0, vento: 26.2, pressao: 1007.4, umidade: 84.0, temperatura: 24.3, perigo: "Perigo Potencial de Enchente" },
-    { id: 49, dataHora: "2024-06-05 00:00:00", precipitacao: 2.5, nivelAgua: 3.6, vento: 11.6, pressao: 1018.5, umidade: 73.4, temperatura: 23.0, perigo: "Chuva Fraca" },
-    { id: 50, dataHora: "2024-06-06 01:00:00", precipitacao: 8.0, nivelAgua: 4.0, vento: 15.9, pressao: 1009.8, umidade: 79.6, temperatura: 26.2, perigo: "Perigo de Enchente" },
-    { id: 51, dataHora: "2024-01-03 22:00:00", precipitacao: 5.4, nivelAgua: 2.2, vento: 11.9, pressao: 1013.8, umidade: 80.3, temperatura: 24.2, perigo: "Chuva Média" },
-    { id: 52, dataHora: "2024-01-03 23:00:00", precipitacao: 7.8, nivelAgua: 4.4, vento: 20.3, pressao: 1005.1, umidade: 83.7, temperatura: 27.5, perigo: "Chuva Média" },
-    { id: 53, dataHora: "2024-01-04 00:00:00", precipitacao: 9.9, nivelAgua: 3.0, vento: 26.2, pressao: 1007.4, umidade: 84.0, temperatura: 24.3, perigo: "Perigo Potencial de Enchente" },
-    { id: 54, dataHora: "2024-01-04 01:00:00", precipitacao: 2.5, nivelAgua: 3.6, vento: 11.6, pressao: 1018.5, umidade: 73.4, temperatura: 23.0, perigo: "Chuva Fraca" },
-    { id: 55, dataHora: "2024-01-04 02:00:00", precipitacao: 8.0, nivelAgua: 4.0, vento: 15.9, pressao: 1009.8, umidade: 79.6, temperatura: 26.2, perigo: "Perigo de Enchente" },
-    { id: 56, dataHora: "2024-01-04 03:00:00", precipitacao: 3.7, nivelAgua: 3.3, vento: 28.9, pressao: 1017.0, umidade: 85.6, temperatura: 20.4, perigo: "Chuva Média" },
-    { id: 57, dataHora: "2024-01-04 04:00:00", precipitacao: 7.9, nivelAgua: 4.7, vento: 39.1, pressao: 1016.8, umidade: 61.1, temperatura: 34.3, perigo: "Perigo de Enchente" },
-    { id: 58, dataHora: "2024-01-04 05:00:00", precipitacao: 9.5, nivelAgua: 4.1, vento: 29.3, pressao: 985.5, umidade: 74.4, temperatura: 33.6, perigo: "Grande Perigo de Enchente" },
-    { id: 59, dataHora: "2024-01-04 06:00:00", precipitacao: 9.4, nivelAgua: 2.8, vento: 12.3, pressao: 1000.9, umidade: 84.5, temperatura: 26.2, perigo: "Perigo Potencial de Enchente" },
-    { id: 60, dataHora: "2024-01-04 07:00:00", precipitacao: 0.2, nivelAgua: 1.6, vento: 53.8, pressao: 1009.6, umidade: 85.1, temperatura: 21.0, perigo: "Chuva Fraca" },
-    { id: 61, dataHora: "2024-01-04 08:00:00", precipitacao: 6.3, nivelAgua: 4.8, vento: 14.2, pressao: 1008.1, umidade: 88.5, temperatura: 27.9, perigo: "Chuva Média" },
-    { id: 62, dataHora: "2024-01-04 09:00:00", precipitacao: 11.6, nivelAgua: 1.9, vento: 19.8, pressao: 1012.7, umidade: 95.8, temperatura: 21.4, perigo: "Chuva Forte" },
-    { id: 63, dataHora: "2024-01-04 10:00:00", precipitacao: 2.2, nivelAgua: 3.1, vento: 58.1, pressao: 988.2, umidade: 63.8, temperatura: 24.8, perigo: "Chuva Fraca" },
-    { id: 64, dataHora: "2024-01-04 11:00:00", precipitacao: 15.6, nivelAgua: 1.4, vento: 15.3, pressao: 991.9, umidade: 79.1, temperatura: 28.5, perigo: "Chuva Forte" },
-    { id: 65, dataHora: "2024-01-04 12:00:00", precipitacao: 19.9, nivelAgua: 4.4, vento: 54.1, pressao: 1009.2, umidade: 66.6, temperatura: 19.1, perigo: "Grande Perigo de Enchente" },
-    { id: 66, dataHora: "2024-01-04 13:00:00", precipitacao: 9.4, nivelAgua: 4.2, vento: 18.2, pressao: 990.6, umidade: 84.9, temperatura: 20.5, perigo: "Perigo de Enchente" },
-    { id: 67, dataHora: "2024-01-04 14:00:00", precipitacao: 7.5, nivelAgua: 2.1, vento: 11.6, pressao: 1015.4, umidade: 98.4, temperatura: 23.7, perigo: "Chuva Média" },
-    { id: 68, dataHora: "2024-01-04 15:00:00", precipitacao: 10.8, nivelAgua: 4.0, vento: 55.7, pressao: 989.7, umidade: 78.3, temperatura: 18.9, perigo: "Grande Perigo de Enchente" },
-    { id: 69, dataHora: "2024-01-04 16:00:00", precipitacao: 19.6, nivelAgua: 4.1, vento: 29.4, pressao: 1000.3, umidade: 70.0, temperatura: 33.8, perigo: "Grande Perigo de Enchente" },
-    { id: 70, dataHora: "2024-01-04 17:00:00", precipitacao: 15.1, nivelAgua: 3.5, vento: 22.6, pressao: 1011.7, umidade: 74.3, temperatura: 18.0, perigo: "Chuva Forte" }       
-        ];
+        document.getElementById('climaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const dataInicial = document.getElementById('dataInicial').value;
+            const dataFinal = document.getElementById('dataFinal').value;
+            consultarClima(dataInicial, dataFinal);
+        });
 
-        // Função para filtrar dados climáticos com base nas datas
-        function aplicarFiltro() {
-            const dataInicio = document.getElementById("dataInicio").value;
-            const dataFim = document.getElementById("dataFim").value;
-
-            if (!dataInicio || !dataFim) {
-                alert("Por favor, selecione as datas de início e fim.");
-                return;
-            }
-
-            const dataInicioObj = new Date(dataInicio);
-            const dataFimObj = new Date(dataFim);
-
-            const dadosFiltrados = dadosClima.filter(dado => {
-                const dataDado = new Date(dado.dataHora);
-                return dataDado >= dataInicioObj && dataDado <= dataFimObj;
-            });
-
-            exibirResultados(dadosFiltrados);
+        function consultarClima(dataInicial, dataFinal) {
+            // Função para consultar clima no intervalo fornecido
+            // Implementar a lógica para consultar clima com dados históricos entre as datas
+            document.getElementById('resultadosClima').innerHTML = `Consultando clima de ${dataInicial} a ${dataFinal}...`;
         }
 
-        // Função para exibir resultados na página
-        function exibirResultados(dados) {
-            const resultadoDiv = document.getElementById("resultado");
-            resultadoDiv.innerHTML = "";
+        function preverClimaFuturo(intervaloDias) {
+            const hoje = new Date();
+            const dataFutura = new Date();
+            dataFutura.setDate(hoje.getDate() + intervaloDias);
+            const dataFuturaFormatada = dataFutura.toISOString().split('T')[0];
 
-            if (dados.length === 0) {
-                resultadoDiv.innerHTML = "<p>Nenhum dado encontrado para o período selecionado.</p>";
-                return;
-            }
-
-            const tabela = document.createElement("table");
-            tabela.classList.add("table", "table-striped");
-
-            const thead = document.createElement("thead");
-            thead.innerHTML = `
-                <tr>
-                    <th>ID</th>
-                    <th>Data/Hora</th>
-                    <th>Precipitação (mm)</th>
-                    <th>Nível da Água (m)</th>
-                    <th>Vento (km/h)</th>
-                    <th>Pressão (hPa)</th>
-                    <th>Umidade (%)</th>
-                    <th>Temperatura (°C)</th>
-                    <th>Perigo</th>
-                </tr>
-            `;
-            tabela.appendChild(thead);
-
-            const tbody = document.createElement("tbody");
-            dados.forEach(dado => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${dado.id}</td>
-                    <td>${dado.dataHora}</td>
-                    <td>${dado.precipitacao}</td>
-                    <td>${dado.nivelAgua}</td>
-                    <td>${dado.vento}</td>
-                    <td>${dado.pressao}</td>
-                    <td>${dado.umidade}</td>
-                    <td>${dado.temperatura}</td>
-                    <td>${dado.perigo}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-            tabela.appendChild(tbody);
-
-            resultadoDiv.appendChild(tabela);
-        }
-
-        // Função para ver histórico de clima
-        function verHistoricoClima() {
-            exibirResultados(dadosClima);
-        }
-
-        // Função para ver possibilidades de enchentes
-        function verPossibilidadesEnchentes() {
-            const dadosEnchentes = dadosClima.filter(dado => dado.perigo.includes("Enchente"));
-            exibirResultados(dadosEnchentes);
+            // Implementar lógica para prever clima futuro usando dados históricos
+            // Exemplo simplificado para fins ilustrativos
+            document.getElementById('resultadosClima').innerHTML = `Previsão do clima para os próximos ${intervaloDias} dias (${dataFuturaFormatada}):<br>Temperatura média: 25°C<br>Chuva: 10%<br>Umidade: 60%`;
         }
     </script>
 </body>
